@@ -1,0 +1,2 @@
+# phonememe
+Phoneme recognition project
