@@ -22,7 +22,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, LSTM, Masking
 from keras.regularizers import l2, activity_l2
 
-batch_size, num_batches = 4096, 100
+batch_size, num_batches = 4096, 20
 length, num_features = 20, 40
 
 print('Loading data...')
