@@ -22,7 +22,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, LSTM, Masking
 from keras.regularizers import l2, activity_l2
 
-batch_size, num_batches = 1024, 30
+batch_size, num_batches = 4096, 15
 length, num_features = 20, 40
 
 print('Loading data...')
@@ -49,8 +49,8 @@ print('X_test shape: ', X_test.shape)
 print('Build model...')
 model = Sequential()
 model.add(Masking(mask_value=0.0, input_shape=(length, num_features)))
-model.add(LSTM(512, return_sequences=True, input_shape=(length, num_features)))
-model.add(LSTM(512))
+model.add(LSTM(256, return_sequences=True, input_shape=(length, num_features)))
+model.add(LSTM(256))
 model.add(Dense(num_phonemes))
 model.add(Activation('softmax'))
 
@@ -66,3 +66,6 @@ score, acc = model.evaluate(X_test, Y_test,
                             batch_size=batch_size)
 print('Test score:', score)
 print('Test accuracy:', acc)
+
+Y_pred = model.predict(X_test, batch_size=batch_size)
+np.memmap('Y_pred.mat', dtype='float32', mode='w+', shape=Y_pred.shape)[:] = Y_pred
