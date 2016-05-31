@@ -5,7 +5,7 @@ from __future__ import unicode_literals, print_function
 import sys
 from matplotlib import pyplot as plt
 
-plot_fn, = sys.argv[1:]
+plot_fn, title = sys.argv[1:]
 
 epoch = None
 i_train, loss_train = [], []
@@ -28,6 +28,7 @@ for line in lines:
         loss_val.append(loss)
         base_i = i_train[-1]
 
+plt.title(title)
 plt.plot(i_train, loss_train, 'g-o', label='Training loss')
 plt.plot(i_val, loss_val, 'b-o', label='Validation loss')
 plt.legend()
